@@ -32,12 +32,6 @@ dog.fetch = function() {
 var myDog = Object.create(dog);
 var empty = Object.create(null);
 
-var human = {
-	talk: function() {
-		console.log('talk');
-	}
-};
-
 tests({
 	'It should return true if prototypeObject is a direct prototype of newObject.': function() {
 		eq(isPrototypeOf(dog, myDog), true);
