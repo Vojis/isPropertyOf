@@ -1,0 +1,67 @@
+<script src="https://rawgit.com/Vojis/ab280c9710c359c187dc685262361a14/raw/8e30a9888232af8d5600d97f0f920462badf1c5d/simpleTest.js"></script>
+<script>
+
+function isPrototypeOf(prototypeObject, newObject) {
+	// Base case 1: prototypeObject is null or undefined;
+	if (prototypeObject === null || prototypeObject === undefined) {
+		throw new TypeError('Please define the prototypeObject');
+	}
+	// Base case 2: prototype of newObject is null.
+	if (Object.getPrototypeOf(newObject) === null) {
+		return false;
+	}
+	// Base case 3: prototypeObject is the prototype of newObject.
+	if (Object.getPrototypeOf(newObject) === prototypeObject) {
+		return true;  
+	}
+	// Recursive case:
+	 if (Object.getPrototypeOf(newObject) !== prototypeObject) {
+		return isPrototypeOf(prototypeObject, Object.getPrototypeOf(newObject));
+	}
+}
+
+// variables used for tests:
+var canine = {
+  bark: function() {
+    console.log('bark');
+  }
+};
+var dog = Object.create(canine);
+dog.fetch = function() {
+  console.log('fetch');
+};
+var myDog = Object.create(dog);
+var empty = Object.create(null);
+
+tests({
+  'It should return true if prototypeObject is a direct prototype of newObject.': function() {
+		eq(isPrototypeOf(dog, myDog), true);
+		eq(isPrototypeOf(canine, myDog), true);
+		eq(isPrototypeOf(Object.prototype, canine), true);
+  },
+  'It should return true if prototypeObject is indirect prototype of newObject.': function() {
+		eq(isPrototypeOf(Object.prototype, myDog), true);
+		eq(isPrototypeOf(canine, myDog), true);
+  },  
+  'It should return false if newObject does not have a prototype (i.e. prototype of newObject is null).': function() {
+		eq(isPrototypeOf(dog, empty), false);
+  },
+  'It should return a TypeError if prototypeObject is null or undefined.': function() {
+  	var isTypeError = false;
+  	try {
+  		isPrototypeOf(null, {});
+  	} catch(e) {
+  		isTypeError = (e instanceof TypeError);
+  	}
+  	eq(isTypeError, true);
+
+  	isTypeError = false;
+  	try {
+  		isPrototypeOf(undefined, {})
+  	} catch(e) {
+  		isTypeError = (e instanceof TypeError);
+  	}
+  	eq(isTypeError, true);
+  }
+});
+</script>
