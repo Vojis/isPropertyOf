@@ -1,5 +1,8 @@
 <script src="https://rawgit.com/Vojis/ab280c9710c359c187dc685262361a14/raw/8e30a9888232af8d5600d97f0f920462badf1c5d/simpleTest.js"></script>
 <script>
+// When iterating over the properties of an object, every enumerable property that is on the prototype chain will be enumerated.To check whether an object has a property defined on itself and not somewhere on its prototype chain, it is necessary to use the hasOwnProperty method which all objects inherit from Object.prototype
+
+// hasOwnProperty is the only thing in JavaScript which deals with properties and does not traverse the prototype chain.
 function isPrototypeOf(prototypeObject, newObject) {
 	// Base case 1: prototypeObject is null or undefined;
 	if (prototypeObject === null || prototypeObject === undefined) {
@@ -26,7 +29,7 @@ var canine = {
 };
 var dog = Object.create(canine);
 dog.fetch = function() {
-  console.log('fetch');
+	console.log('fetch');
 };
 var myDog = Object.create(dog);
 var empty = Object.create(null);
