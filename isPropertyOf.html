@@ -1,6 +1,5 @@
 <script src="https://rawgit.com/Vojis/ab280c9710c359c187dc685262361a14/raw/8e30a9888232af8d5600d97f0f920462badf1c5d/simpleTest.js"></script>
 <script>
-
 function isPrototypeOf(prototypeObject, newObject) {
 	// Base case 1: prototypeObject is null or undefined;
 	if (prototypeObject === null || prototypeObject === undefined) {
@@ -37,14 +36,14 @@ tests({
 		eq(isPrototypeOf(dog, myDog), true);
 		eq(isPrototypeOf(canine, myDog), true);
 		eq(isPrototypeOf(Object.prototype, canine), true);
-  },
+	},
 	'It should return true if prototypeObject is indirect prototype of newObject.': function() {
 		eq(isPrototypeOf(Object.prototype, myDog), true);
 		eq(isPrototypeOf(canine, myDog), true);
-  },  
+	},  
 	'It should return false if newObject does not have a prototype (i.e. prototype of newObject is null).': function() {
 		eq(isPrototypeOf(dog, empty), false);
-  },
+	},
 	'It should return a TypeError if prototypeObject is null or undefined.': function() {
 		var isTypeError = false;
 		try {
