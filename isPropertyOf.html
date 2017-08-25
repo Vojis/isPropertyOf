@@ -1,5 +1,6 @@
 <script src="https://rawgit.com/Vojis/ab280c9710c359c187dc685262361a14/raw/8e30a9888232af8d5600d97f0f920462badf1c5d/simpleTest.js"></script>
 <script>
+
 function isPrototypeOf(prototypeObject, newObject) {
 	// Base case 1: prototypeObject is null or undefined;
 	if (prototypeObject === null || prototypeObject === undefined) {
@@ -60,6 +61,6 @@ tests({
 			isTypeError = (e instanceof TypeError);
 		}
 		eq(isTypeError, true);
-  }
+	}
  });
 </script>
